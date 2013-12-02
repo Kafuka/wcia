@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListQuoteRequestDetailsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListQuoteRequestDetailsEmpty}" rendered="#{quoteRequestDetailsController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{quoteRequestDetailsController.items.rowCount > 0}">
+                    <h:outputText value="#{quoteRequestDetailsController.pagination.pageFirstItem + 1}..#{quoteRequestDetailsController.pagination.pageLastItem + 1}/#{quoteRequestDetailsController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{quoteRequestDetailsController.previous}" value="#{bundle.Previous} #{quoteRequestDetailsController.pagination.pageSize}" rendered="#{quoteRequestDetailsController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{quoteRequestDetailsController.next}" value="#{bundle.Next} #{quoteRequestDetailsController.pagination.pageSize}" rendered="#{quoteRequestDetailsController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{quoteRequestDetailsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuoteRequestDetailsTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuoteRequestDetailsTitle_serviceId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.serviceId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuoteRequestDetailsTitle_requestId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.requestId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{quoteRequestDetailsController.prepareView}" value="#{bundle.ListQuoteRequestDetailsViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{quoteRequestDetailsController.prepareEdit}" value="#{bundle.ListQuoteRequestDetailsEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{quoteRequestDetailsController.destroy}" value="#{bundle.ListQuoteRequestDetailsDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{quoteRequestDetailsController.prepareCreate}" value="#{bundle.ListQuoteRequestDetailsCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListQuoteRequestDetailsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

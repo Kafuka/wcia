@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListQuoteRequestTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListQuoteRequestEmpty}" rendered="#{quoteRequestController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{quoteRequestController.items.rowCount > 0}">
+                    <h:outputText value="#{quoteRequestController.pagination.pageFirstItem + 1}..#{quoteRequestController.pagination.pageLastItem + 1}/#{quoteRequestController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{quoteRequestController.previous}" value="#{bundle.Previous} #{quoteRequestController.pagination.pageSize}" rendered="#{quoteRequestController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{quoteRequestController.next}" value="#{bundle.Next} #{quoteRequestController.pagination.pageSize}" rendered="#{quoteRequestController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{quoteRequestController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuoteRequestTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuoteRequestTitle_requestDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.requestDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuoteRequestTitle_status}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.status}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuoteRequestTitle_custId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.custId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{quoteRequestController.prepareView}" value="#{bundle.ListQuoteRequestViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{quoteRequestController.prepareEdit}" value="#{bundle.ListQuoteRequestEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{quoteRequestController.destroy}" value="#{bundle.ListQuoteRequestDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{quoteRequestController.prepareCreate}" value="#{bundle.ListQuoteRequestCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListQuoteRequestIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

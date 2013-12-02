@@ -3,11 +3,14 @@
  * and open the template in the editor.
  */
 package com.africomgroup.wcia.entities;
+
+import java.io.Serializable;
+
 /**
  *
  * @author Jordy Mugeni
  */
-public class Quote {
+public class Quote implements Serializable{
     
     private String id;
     private double total;
