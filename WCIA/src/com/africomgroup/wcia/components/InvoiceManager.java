@@ -6,7 +6,6 @@
 
 package com.africomgroup.wcia.components;
 
-import com.africomgroup.wcia.entities.Invoice;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ import java.util.List;
  * 
  */
 public interface InvoiceManager {
-    
+    /*
     public Invoice findInvoice ();
     public List <Invoice> findInvoicesByDate ();
     public void addInvoice (Invoice invoice);
@@ -23,4 +22,5 @@ public interface InvoiceManager {
     public void deleteInvoice ();
     public void cancelInvoice ();
     public void concludeInvoide ();
+    */
 }
