@@ -6,14 +6,12 @@
 
 package com.africomgroup.wcia.components;
 
-import com.africomgroup.wcia.entities.Invoice;
-
 /**
  *
  * @author Jordy Mugeni
  * 
  */
 public interface InvoiceBuilder {
-    public Invoice buildInvoice ();
+    //public Invoice buildInvoice ();
     
 }
